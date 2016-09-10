@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='phonebook'>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phonebook</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-controller='PhonebookController as phonebookCtrl' ng-switch on='view'>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon">SEARCH</span>
+                    <input type="text" class="form-control" ng-model='query'>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default" ng-click="view='list'">
+                        <span class="glyphicon glyphicon-th-large"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="view='table'">
+                        <span class="glyphicon glyphicon-th-list"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div ng-switch-when='list'>
+            <pb-person-card ng-repeat='person in persons | filter:query' person='person'>
+            </pb-person-card>
+        </div>
+        <table class="table" ng-switch-when="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in persons | filter:query">
+                    <td>{{$index + 1}}</td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.company}}</td>
+                    <td>{{p.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+    </script>
+</body>
+
+</html>
